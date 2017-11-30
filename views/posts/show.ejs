@@ -52,11 +52,11 @@
                 <% if(post.comments) { %>
                 <% post.comments.forEach(function(comment){ %>
                     <div class="comment">
-                        <div class="top">
+                       <div class="top">
                         <b><%= comment.author.nickname %></b>
                         (<%= post.getFormattedTime(comment.createdAt) %>,
                         <%= post.getFormattedDate(comment.createdAt) %>)
-                        <% if(user && user.equals(comment.author._id)) { %>
+                        <% if(isAuthenticated && post.author && currentUser.id == post.author.id) { %>
                             <form class="delete"  method="post"
                                 action="/posts/<%=post._id%>/comments/<%=comment._id%>?_method=delete&<%= urlQuery %>">
                                 <button type="button"

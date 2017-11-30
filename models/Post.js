@@ -40,6 +40,16 @@ postSchema.virtual("updatedTime")
   return util.getTime(this.updatedAt);
 });
 
+postSchema.methods.getFormattedDate = function (date) {
+  return date.getFullYear() + "-" + get2digits(date.getMonth()+1)+ "-" + get2digits(date.getDate());
+};
+
+postSchema.methods.getFormattedTime = function (date) {
+  return get2digits(date.getHours()) + ":" + get2digits(date.getMinutes())+ ":" + get2digits(date.getSeconds());
+};
+function get2digits(num){
+  return ("0" + num).slice(-2);
+}
 // model & export
 var Post = mongoose.model("post", postSchema);
 module.exports = Post;
